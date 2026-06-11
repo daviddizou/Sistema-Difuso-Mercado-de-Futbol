@@ -1,0 +1,57 @@
+[System]
+Name='mercado_jugador'
+Type='mamdani'
+Version=2.0
+NumInputs=3
+NumOutputs=1
+NumRules=10
+AndMethod='min'
+OrMethod='max'
+ImpMethod='min'
+AggMethod='max'
+DefuzzMethod='centroid'
+
+[Input1]
+Name='Edad'
+Range=[16 40]
+NumMFs=3
+MF1='Joven':'trapmf',[16 16 22 25]
+MF2='Maduro':'trimf',[23 27 31]
+MF3='Veterano':'trapmf',[29 33 40 40]
+
+[Input2]
+Name='Rendimiento'
+Range=[0 10]
+NumMFs=3
+MF1='Pobre':'trapmf',[0 0 3 5]
+MF2='Promedio':'trimf',[3 5 7]
+MF3='Estelar':'trapmf',[6 8 10 10]
+
+[Input3]
+Name='Contrato'
+Range=[0 5]
+NumMFs=3
+MF1='Corto':'trapmf',[0 0 1 2]
+MF2='Medio':'trimf',[1 2.5 4]
+MF3='Largo':'trapmf',[3 4 5 5]
+
+[Output1]
+Name='Valor'
+Range=[0 200]
+NumMFs=4
+MF1='Bajo':'trapmf',[0 0 20 40]
+MF2='Moderado':'trimf',[30 60 90]
+MF3='Elevado':'trimf',[80 120 160]
+MF4='Record':'trapmf',[150 180 200 200]
+
+[Rules]
+1 3 3, 4 (1) : 1
+3 0 1, 1 (1) : 1
+0 1 0, 1 (1) : 1
+2 2 2, 2 (1) : 1
+1 2 0, 3 (1) : 1
+2 3 1, 3 (1) : 1
+3 3 0, 2 (1) : 1
+0 2 3, 2 (1) : 1
+1 3 1, 3 (1) : 1
+3 1 0, 1 (1) : 1

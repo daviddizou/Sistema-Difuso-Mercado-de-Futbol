@@ -1,0 +1,66 @@
+[System]
+Name='mercado_jugador_realista'
+Type='mamdani'
+Version=2.0
+NumInputs=3
+NumOutputs=1
+NumRules=15
+AndMethod='prod'
+OrMethod='max'
+ImpMethod='prod'
+AggMethod='sum'
+DefuzzMethod='centroid'
+
+[Input1]
+Name='Edad'
+Range=[15 42]
+NumMFs=5
+MF1='Talento':'trapmf',[15 15 18 20]
+MF2='Joven':'trimf',[19 21.5 24]
+MF3='Prime':'trimf',[23 26.5 29]
+MF4='Veterano':'trimf',[28.5 31.5 34]
+MF5='Retirada':'trapmf',[32 35 42 42]
+
+[Input2]
+Name='Rendimiento'
+Range=[0 10]
+NumMFs=4
+MF1='Malo':'trapmf',[0 0 5.5 6.4]
+MF2='Normal':'trimf',[6 6.8 7.5]
+MF3='Bueno':'trimf',[7 7.5 8]
+MF4='Alto':'trapmf',[7.8 8.5 10 10]
+
+[Input3]
+Name='Equipo'
+Range=[0 260]
+NumMFs=3
+MF1='Pequeno':'trapmf',[0 0 40 60]
+MF2='Competitivo':'trimf',[40 70 100]
+MF3='Grande':'trapmf',[80 130 260 260]
+
+[Output1]
+Name='Valor'
+Range=[0 250]
+NumMFs=5
+MF1='Residual':'trapmf',[0 0 4 12]
+MF2='Bajo':'trimf',[8 25 55]
+MF3='Medio':'trimf',[50 90 140]
+MF4='Alto':'trimf',[130 175 210]
+MF5='Superestrella':'trapmf',[200 230 250 250]
+
+[Rules]
+0 1 0, 1 (1) : 1
+0 2 1, 1 (1) : 1
+0 2 2, 2 (1) : 1
+0 2 3, 2 (1) : 1
+0 3 1, 2 (1) : 1
+0 3 2, 3 (1) : 1
+0 3 3, 3 (1) : 1
+0 4 1, 3 (1) : 1
+0 4 2, 4 (1) : 1
+0 4 3, 5 (1) : 1
+5 0 0, 1 (1) : 1
+4 0 0, 1 (0.8) : 1
+5 4 3, 2 (1) : 1
+1 4 3, 5 (1) : 1
+2 4 3, 5 (1) : 1
